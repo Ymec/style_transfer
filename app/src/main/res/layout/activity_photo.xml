@@ -1,0 +1,175 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="feed"
+            type="com.jascal.flora.net.bean.tc.Feed" />
+
+        <variable
+            name="site"
+            type="com.jascal.flora.net.bean.tc.Site" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimaryLight_">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|snap|enterAlways">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title=""
+                app:titleTextColor="?attr/colorPrimaryText_">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp"
+                    android:orientation="horizontal">
+
+                    <com.jascal.flora.widget.DrawableTextView
+                        android:id="@+id/back"
+                        android:layout_width="28dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:drawable_height="28dp"
+                        app:drawable_location="left"
+                        app:drawable_src="@mipmap/ic_close"
+                        app:drawable_width="28dp" />
+
+                    <com.jascal.flora.widget.DrawableTextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/photo"
+                        android:textColor="?attr/colorText_"
+                        android:textSize="18sp" />
+
+                    <com.jascal.flora.widget.DrawableTextView
+                        android:id="@+id/share"
+                        android:layout_width="28dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:drawable_height="28dp"
+                        app:drawable_location="right"
+                        app:drawable_src="@mipmap/ic_share"
+                        app:drawable_width="28dp" />
+
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="41dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/icon"
+                        android:layout_width="41dp"
+                        android:layout_height="41dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        app:roundAsCircle="true" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/icon"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/icon"
+                        android:text="@{site.name}"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/icon"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/icon"
+                        android:text="@{feed.created_at}"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/reset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/button_bg"
+                        android:text="reset"
+                        android:textAllCaps="false"
+                        android:textColor="?attr/colorText_" />
+
+                    <!--android:background="@drawable/button_bg"-->
+
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        app:fadeDuration="500" />
+
+                    <ProgressBar
+                        android:id="@+id/progress"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="center"/>
+                </FrameLayout>
+
+                <com.jascal.flora.widget.StylizedGridView
+                    android:id="@+id/grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:horizontalSpacing="10dp"
+                    android:numColumns="7"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp" />
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
